@@ -7,8 +7,8 @@
 % gibt das Tabellenverzeichnis im Inhaltsverzeichnis (toc=Table% of Content) aus.
 % Da es aber verschiedene Regelungen je nach Dozent geben kann, werden hier
 % beide Varianten dargestellt.
-%\documentclass[12pt,oneside,titlepage,listof=totoc,bibliography=totoc]{scrartcl}
-\documentclass[12pt,oneside,titlepage,bibliography=totoc]{scrartcl}
+\documentclass[12pt,oneside,titlepage,listof=totoc,bibliography=totoc]{scrartcl}
+%\documentclass[12pt,oneside,titlepage,bibliography=totoc]{scrartcl}
 \usepackage[utf8]{inputenc}
 %Dokumentensprache
 \newif\ifde
@@ -35,7 +35,9 @@
 \usepackage{array}
 \usepackage{float}      %Positionierung von Abb. und Tabellen mit [H] erzwingen
 \usepackage{footnote}
+\usepackage{pdfpages}
 \usepackage{caption}
+%\usepackage[format=plain,justification=RaggedRight,singlelinecheck=false]{caption}
 \usepackage{enumitem}
 \usepackage{amssymb}
 \usepackage{mathptmx}
@@ -129,22 +131,6 @@ mincrossrefs = 1
 %weitere Anpassungen für BibLaTex
 \input{skripte/modsBiblatex2018}
 
-%%%%% Alter Leitfaden. Ggf. Einkommentieren und Bereich hierüber auskommentieren
-%\usepackage[
-%backend=biber,
-%style=numeric,
-%citestyle=authoryear,
-%url=false,
-%isbn=false,
-%notetype=footonly,
-%hyperref=false,
-%sortlocale=de]{biblatex}
-
-%weitere Anpassungen für BibLaTex
-%\input{skripte/modsBiblatex}
-
-%%%% Ende Alter Leitfaden
-
 %Bib-Datei einbinden
 \addbibresource{literatur/literatur.bib}
 
@@ -155,6 +141,9 @@ mincrossrefs = 1
 
 % Pfad fuer Abbildungen
 \graphicspath{{./}{./abbildungen/}}
+
+%Angabe von Quellen für Abbildungen
+\newcommand*{\quelle}[1]{\par\raggedleft\footnotesize Quelle:~#1}
 
 %-----------------------------------
 % Weitere Ebene einfügen
@@ -181,8 +170,8 @@ mincrossrefs = 1
 % Die Option 'intoc' zeigt das Abkürzungsverzeichnis innerhalb des
 % Inhaltsverzeichnisses an. Das ist laut Leitfaden nicht nötig.
 % (siehe auch Tabellen- und Abbildungsverzeichnis oben)
-% \usepackage[intoc]{nomencl}
-\usepackage{nomencl}
+\usepackage[intoc]{nomencl}
+%\usepackage{nomencl}
 \renewcommand{\nomname}{Abkürzungsverzeichnis}
 \setlength{\nomlabelwidth}{.20\textwidth}
 \renewcommand{\nomlabel}[1]{#1 \dotfill}
@@ -261,14 +250,14 @@ mincrossrefs = 1
 		\myStudiengang, \mySemesterZahl. Semester\\
 		\vspace{2cm}
 		\textbf{\myThesisArt}\\
-		\textbf{
-				\langde{zur Erlangung des Grades eines}
-				\langen{to obtain the degree of}
-				}\\
-		\textbf{\myAkademischerGrad}\\
+		%\textbf{
+		%		\langde{zur Erlangung des Grades eines}
+		%		\langen{to obtain the degree of}
+		%		}\\
+		%\textbf{\myAkademischerGrad}\\
 		% Oder für Hausarbeiten:
-		%\textbf{im Rahmen der Lehrveranstaltung}\\
-		%\textbf{\myLehrveranstaltung}\\
+		\textbf{im Rahmen der Lehrveranstaltung}\\
+		\textbf{\myLehrveranstaltung}\\
 		\vspace{2cm}
 		\langde{über das Thema}
 		\langen{on the subject}\\
@@ -299,15 +288,16 @@ mincrossrefs = 1
 %-----------------------------------
 % Sperrvermerk
 %-----------------------------------
-%\input{kapitel/anhang/sperrvermerk}
+\input{kapitel/anhang/sperrvermerk}
 
 %-----------------------------------
 % Inhaltsverzeichnis
 %-----------------------------------
+%\usepackage[nottoc]{tocbibind}
 \setcounter{page}{2}
 \tableofcontents
 \newpage
-\setcounter{tocdepth}{2} %wurde vorher in zusaetzlichesMaterial.tex auf 0 gesetzt um Inhalt des Anhangs zu verbergen. Dadurch gehen allerdings Abbildungs und Tabellenverzeichnis kaputt.
+\setcounter{tocdepth}{2}
 
 %-----------------------------------
 % Abbildungsverzeichnis
@@ -317,8 +307,10 @@ mincrossrefs = 1
 %-----------------------------------
 % Tabellenverzeichnis
 %-----------------------------------
-\listoftables
-\newpage
+%\refstepcounter{section}
+%\addcontentsline{toc}{section}{\listtablename}
+%\listoftables
+%\newpage
 %-----------------------------------
 % Abkürzungsverzeichnis
 %-----------------------------------
@@ -332,6 +324,7 @@ mincrossrefs = 1
 %-----------------------------------
 % Kapitel / Inhalte
 %-----------------------------------
+\setcounter{section}{0}
 \input{kapitel/einleitung/einleitung}
 \input{kapitel/kapitel_1/kapitel_1}
 \input{kapitel/kapitel_2/kapitel_2}
@@ -346,9 +339,9 @@ mincrossrefs = 1
 \pagenumbering{Roman} %Zähler wieder römisch ausgeben
 \setcounter{page}{4}  %Zähler manuell hochsetzen
 
-\begin{RaggedRight}
-\printbibliography
-\end{RaggedRight}
+%\begin{RaggedRight}
+%\printbibliography[title={Literaturverzeichnis}]
+%\end{RaggedRight}
 
 % Alternative Darstellung:
 % Literaturverzeichnis nach Typ (@book, @arcticle ...) sortiert.
@@ -361,9 +354,9 @@ mincrossrefs = 1
 
 % weitere Variante, die nur Online von anderen Quellen trennt:
 
-%\printbibheading
-%\printbibliography[nottype=online,heading=subbibliography,title={Literaturquellen}]
-%\printbibliography[type=online,heading=subbibliography,title={Internetquellen}]
+\printbibheading[title={Literaturverzeichnis}]
+\printbibliography[nottype=online,heading=subbibliography,title={Literaturquellen}]
+\printbibliography[type=online,heading=subbibliography,title={Internetquellen}]
 
 
 % Um mehrere Typen zu vereinen kann ein Bibliography-Filter verwendet werden
