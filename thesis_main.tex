@@ -68,6 +68,8 @@
 \usepackage{mdwlist}
 \usepackage{tabularx}% für breitenangabe
 
+% add the euro sign
+\usepackage[official]{eurosym}
 \definecolor{dunkelgrau}{rgb}{0.8,0.8,0.8}
 \definecolor{hellgrau}{rgb}{0.0,0.7,0.99}
 % Colors for listings
@@ -143,7 +145,8 @@ mincrossrefs = 1
 \graphicspath{{./}{./abbildungen/}}
 
 %Angabe von Quellen für Abbildungen
-\newcommand*{\quelle}[1]{\par\raggedleft\footnotesize Quelle:~#1}
+\newcommand*{\quelle}[1]{\par\raggedleft\footnotesize \langde{Quelle}
+\langen{Source}:~#1}
 
 %-----------------------------------
 % Weitere Ebene einfügen
@@ -172,7 +175,8 @@ mincrossrefs = 1
 % (siehe auch Tabellen- und Abbildungsverzeichnis oben)
 \usepackage[intoc]{nomencl}
 %\usepackage{nomencl}
-\renewcommand{\nomname}{Abkürzungsverzeichnis}
+%\renewcommand{\nomname}{Abkürzungsverzeichnis}
+\renewcommand{\nomname}{List of Abbreviations}
 \setlength{\nomlabelwidth}{.20\textwidth}
 \renewcommand{\nomlabel}[1]{#1 \dotfill}
 \setlength{\nomitemsep}{-\parsep}
@@ -240,14 +244,15 @@ mincrossrefs = 1
 		\textbf{\myHochschulName}\\
 		\textbf{
 			\langde{Hochschulzentrum}
-			\langen{university location}
+			\langen{University Location}
 			\myHochschulStandort}\\
 		\vspace{1.5cm}
 			\includegraphics[width=3cm]{abbildungen/fomLogo.jpg} \\
 		\vspace{1.5cm}
 		\langde{Berufsbegleitender Studiengang}
-		\langen{part-time degree program}\\
-		\myStudiengang, \mySemesterZahl. Semester\\
+		\langen{Extra-Occupational Study Programme on Bachelor of Science}\\
+		\myStudiengang, \mySemesterZahl \langde{.}
+				\langen{th} Semester\\
 		\vspace{2cm}
 		\textbf{\myThesisArt}\\
 		%\textbf{
@@ -256,11 +261,14 @@ mincrossrefs = 1
 		%		}\\
 		%\textbf{\myAkademischerGrad}\\
 		% Oder für Hausarbeiten:
-		\textbf{im Rahmen der Lehrveranstaltung}\\
+		\textbf{
+			\langde{im Rahmen der Lehrveranstaltung}
+			\langen{in the Context of the Course}
+		}\\
 		\textbf{\myLehrveranstaltung}\\
 		\vspace{2cm}
 		\langde{über das Thema}
-		\langen{on the subject}\\
+		\langen{on the Subject}\\
 		\Large{\myTitel}\\
 		\vspace{0.2cm}
 	\end{center}
@@ -273,13 +281,13 @@ mincrossrefs = 1
 		\> \> \\
 
 		\langde{Autor}
-		\langen{Author}: \> \> \> \myAutor\\
-		\> \> \>  \langde{Matrikelnr.}
-				\langen{Matriculation Number}: \myMatrikelNr\\
+		\langen{Author}: \> \> \>\myAutor\\
+		\> \> \> \langde{Matrikelnr.}
+				\langen{Matriculation number}: \myMatrikelNr\\
 		\> \> \> \myAdresse\\
-		\> \> \>  \\
+		\> \> \> \\
 		\langde{Abgabe}
-		\langen{Submission}: \> \> \> \myAbgabeDatum
+		\langen{Submission}: \> \> \>\myAbgabeDatum
 	\end{tabbing}
 \end{titlepage}
 
@@ -337,7 +345,7 @@ mincrossrefs = 1
 %\addcontentsline{toc}{section}{Literatur}
 
 \pagenumbering{Roman} %Zähler wieder römisch ausgeben
-\setcounter{page}{4}  %Zähler manuell hochsetzen
+\setcounter{page}{5}  %Zähler manuell hochsetzen
 
 %\begin{RaggedRight}
 %\printbibliography[title={Literaturverzeichnis}]
@@ -354,9 +362,13 @@ mincrossrefs = 1
 
 % weitere Variante, die nur Online von anderen Quellen trennt:
 
-\printbibheading[title={Literaturverzeichnis}]
-\printbibliography[nottype=online,heading=subbibliography,title={Literaturquellen}]
-\printbibliography[type=online,heading=subbibliography,title={Internetquellen}]
+%\printbibheading[title={Literaturverzeichnis}]
+%\printbibliography[nottype=online,heading=subbibliography,title={Literaturquellen}]
+%\printbibliography[type=online,heading=subbibliography,title={Internetquellen}]
+
+\printbibheading[title={List of Cited Literature}]
+\printbibliography[nottype=online,heading=subbibliography,title={Literature sources}]
+\printbibliography[type=online,heading=subbibliography,title={Internet sources}]
 
 
 % Um mehrere Typen zu vereinen kann ein Bibliography-Filter verwendet werden
@@ -366,7 +378,7 @@ mincrossrefs = 1
 % }
 % \printbibliography[filter=literature,heading=subbibliography,title={Literatur}]
 
-
+\newpage
 \fancyhead[C]{\thepage} %weil die Ehrenwörtliche Erklärung keine Seitenzahl hat müssen die Striche entfernt werden
 \input{kapitel/anhang/erklaerung}
 \end{document}

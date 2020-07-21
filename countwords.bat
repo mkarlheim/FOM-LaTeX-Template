@@ -1,0 +1,1 @@
+detex thesis_main.tex > thesis_main.doc
